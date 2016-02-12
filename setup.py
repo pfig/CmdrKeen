@@ -1,22 +1,25 @@
 from setuptools import setup, find_packages
-setup(
-    name = "CommanderKeen",
-    version = "0.1",
-    packages = find_packages(),
-    scripts = ['scripts/keen.py'],
-    author = "Pedro Figueiredo",
-    author_email = "pfig@me.com",
-    description = "Commander Keen is a Slack bot with long term memory",
-    long_description = """Commander Keen at your service
 
-    The finest information sponge in the galaxy.
-    """,
-    license = "MIT",
-    keywords = "slack bot chat",
-    url = "https://pfig.github.io/CmdrKeen/",
-    data_files = [('config', ['cfg/keen.json'])],
-    install_requires = [
+
+def long_description_from_readme():
+    with open('README.rst') as readme:
+        return readme.read()
+
+setup(
+    name="CommanderKeen",
+    version="0.1",
+    packages=find_packages(),
+    scripts=['scripts/keen.py'],
+    author="Pedro Figueiredo",
+    author_email="pfig@me.com",
+    description="Commander Keen is a Slack bot with long term memory",
+    long_description=long_description_from_readme(),
+    license="MIT",
+    keywords="slack bot chat",
+    url="https://pfig.github.io/CmdrKeen/",
+    data_files=[('config', ['cfg/keen.json'])],
     setup_requires=['pytest-runner'],
+    install_requires=[
         'slackclient>=0.16',
         'websocket-client>=0.35',
         'requests>=2.9.1',
