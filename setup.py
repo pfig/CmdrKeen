@@ -16,17 +16,14 @@ setup(
     url = "https://pfig.github.io/CmdrKeen/",
     data_files = [('config', ['cfg/keen.json'])],
     install_requires = [
+    setup_requires=['pytest-runner'],
         'slackclient>=0.16',
         'websocket-client>=0.35',
         'requests>=2.9.1',
         'python-daemon>=2.1.1'
     ],
-    tests_require = [
-        'nose>=1.0',
-        'tissue>=0.9',
-        'nose-cov>=1.0'
-    ],
-    classifiers = [
+    tests_require=['pytest'],
+    classifiers=[
         'Development Status :: 1 - Planning',
         'Environment :: No Input/Output (Daemon)',
         'Intended Audience :: Developers',
@@ -35,6 +32,5 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3.5',
         'Topic :: Communications :: Chat'
-    ],
-    test_suite = 'nose.collector'
+    ]
 )
