@@ -6,6 +6,9 @@ from cmdrkeen.job import Job
 logger = logging.getLogger(__name__)
 
 
+BASE_PACKAGE = 'cmdrkeen.plugins.'
+
+
 class Plugin(object):
     """A Commander Keen plugin
 
@@ -31,15 +34,13 @@ class Plugin(object):
 
     If for any reason this fails, the bot will log the failure and continue.
     """
-    base_package = 'cmdrkeen.plugins'
-
     def __init__(self, name, config=None):
         self.name = name
         self.jobs = []
         self.outputs = []
 
         try:
-            self.module = __import__(self.base_package + '.' + name)
+            self.module = __import__(BASE_PACKAGE + name)
         except ImportError as e:
             logger.error('Failed to load plugin {}: {}'.format(name, e))
             self.module = None
