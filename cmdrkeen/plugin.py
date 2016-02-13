@@ -1,4 +1,5 @@
 import logging
+import sys
 
 from cmdrkeen.job import Job
 
@@ -34,11 +35,14 @@ class Plugin(object):
 
     If for any reason this fails, the bot will log the failure and continue.
     """
-    def __init__(self, name, config=None):
+    def __init__(self, name, config=None, plugin_dir=None):
         self.name = name
+        self.plugin_dir = plugin_dir
         self.jobs = []
         self.outputs = []
 
+        if plugin_dir is not None:
+            sys.path.append(plugin_dir)
         try:
             self.module = __import__(BASE_PACKAGE + name)
         except ImportError as e:

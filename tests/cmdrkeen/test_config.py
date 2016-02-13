@@ -44,6 +44,7 @@ def test_full_configuration(config_full):
     assert config.debug is False
     assert config.background is False
     assert config.log_file == 'keen.log'
+    assert config.plugin_dir == '/home/keen/plugins'
 
     plugins = config.plugins
     assert type(plugins) is dict
@@ -76,6 +77,7 @@ def config_full(tmpdir_factory):
         "debug": false,
         "background": false,
         "log_file": "keen.log",
+        "plugin_dir": "/home/keen/plugins",
         "plugins": {
             "weather": {
                 "default_location": "London, UK"

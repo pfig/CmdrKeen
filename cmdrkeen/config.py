@@ -20,7 +20,11 @@ class Config(object):
         * ``background``: whether to run as a daemon, boolean (default: true)
         * ``log_file``: the path for the log file (default: None)
         * ``debug``: whether to run in debug mode, boolean (default: true)
+        * ``plugin_dir``: a directory where you keep plugins (default:None)
         * ``plugins``: an object defining the plugins to load (default: none)
+
+    If ``plugin_dir`` is defined, its value is added to ``sys.path`` before
+    any plugin loading takes place.
 
     The ``plugins`` object is a map of name -> configuration. Commander Keen
     will try to load the corresponding package from ``cmdrkeen.plugins.name``
@@ -34,6 +38,7 @@ class Config(object):
             "slack_token": "xoxb-super-sekrit-token",
             "data_file": "brain.sqlite3",
             "background": false,
+            "plugin_dir": "/home/keen/plugins",
             "plugins": {
                 "weather": {
                     "default_location": "London, UK"
@@ -42,7 +47,9 @@ class Config(object):
         }
 
         This would run the bot in the foreground and try to load the weather
-        plugin from ``cmdrkeen.plugins.weather``, with the given configuration
+        plugin from ``cmdrkeen.plugins.weather`` (with ``/home/keen/plugins``
+        added to ``sys.path``, so potientally this could be a homegrown
+        plugin), with the given configuration
         object.
     """
     def __init__(self, file_path):
@@ -59,6 +66,7 @@ class Config(object):
         self.background = True
         self.log_file = None
         self.debug = True
+        self.plugin_dir = None
         self.plugins = None
 
         self.__configure_from_file(file_path)
@@ -96,4 +104,5 @@ class Config(object):
         self.background = json_cfg.get('background', True)
         self.debug = json_cfg.get('debug', True)
         self.log_file = json_cfg.get('log_file', None)
+        self.plugin_dir = json_cfg.get('plugin_dir', None)
         self.plugins = json_cfg.get('plugins', None)
