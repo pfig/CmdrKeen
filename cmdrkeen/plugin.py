@@ -50,3 +50,8 @@ class Plugin(object):
             self.module.setup()
 
         logger.info('Plugin {} loaded'.format(name))
+
+    def register_jobs(self):
+        if 'crontable' in dir(self.module):
+            for t, fn in self.module.crontable:
+                self.jobs.append(Job(t, eval('self.module.' + fn)))
