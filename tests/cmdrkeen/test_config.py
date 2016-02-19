@@ -32,6 +32,7 @@ def test_correct_defaults(config_use_defaults):
     assert config.debug is True
     assert config.background is True
     assert config.log_file is None
+    assert config.plugin_dir is None
     assert config.plugins is None
 
 
