@@ -25,7 +25,11 @@ setup(
         'requests>=2.9.1',
         'python-daemon>=2.1.1'
     ],
-    tests_require=['pytest'],
+    tests_require=[
+        'pytest>=2.0',
+        'pytest-cov>=2.0',
+        'pytest-pep8'
+    ],
     classifiers=[
         'Development Status :: 1 - Planning',
         'Environment :: No Input/Output (Daemon)',
